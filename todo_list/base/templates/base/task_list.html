@@ -5,9 +5,9 @@
 
 {%if request.user.is_authenticated %}
 <p>{{request.user}}</p>
-<a href=''>Logut</a>
+<a href="{% url 'logout' %}">Logut</a>
 {% else %}
-<a href=''>Login</a>
+<a href="{% url 'login'%}">Login</a>
 {% endif %}
 
 <p>{{request.user}}</p>
@@ -31,10 +31,23 @@
 
 
 <a href="{% url 'task-create'%}">Add Task</a>
+
+<form method="GET">
+  <input type='text' name='search-area' value="{{search_input}}">
+  <input type="submit" value='search'>
+</form>
+
+
+
+
+
+
+
+
+
 <table>
   <tr>
      <th>Item</th>
-     <th></th>
      <th></th>
      <th></th>
      
@@ -43,7 +56,6 @@
   {% for task in tasks %}
   <tr>
    <td>{{task.title}}</td>
-   <td><a href="{% url 'task' task.id %}">View</a></td>
    <td><a href="{% url 'task-update' task.id %}">edit</a></td>
    <td><a href="{% url 'task-delete' task.id %}">delete</a></td>
   
